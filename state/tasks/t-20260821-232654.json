@@ -1,0 +1,24 @@
+{
+  "id": "t-20260821-232654",
+  "request": "Tarefa recuperada apos perda de state (bug corrigido: testes isolados sobrescreviam state/ real). Revisar o diff atual do UserPulse, ja existente antes desta recuperacao, na branch sync/userpulse-remover-categoria-campanhas-20260819. Nao ha analise previa do Mentor nem relatorio do Dev preservados — recuperando diretamente do estado real do git.",
+  "state": "CANCELADA",
+  "mentorSessionId": "273bead0-f073-4b1d-8df4-f78e87848b2d",
+  "devSessionId": null,
+  "lastMentorAnalysis": null,
+  "devReport": null,
+  "lastReview": "Testes de `resolverTipoDestino`/`hidratarFormState`/`montarPayloadCampanha` para `url_contem` não referenciam a lista de botões do `Index.tsx`, então continuam passando sem alteração. Diff é coerente e de baixo risco.\n\n## O que foi feito\nNo `Index.tsx`, a opção \"Ao acessar uma URL\" foi removida da lista de botões selecionáveis de \"Quando esta campanha aparece?\", mantendo o `case tipoDestino === 'url'` (linha 710) para não quebrar a edição de campanhas legadas com `modo_identificacao='url_contem'` direto na campanha (sem `TelaCatalogo`). Comentário explica a razão.\n\n## Riscos/bugs\nNenhum bloqueante. Ponto de atenção de UX (não é bug de dados): ao editar uma campanha legada nesse modo, nenhum dos 3 botões (`tela`/`data_cy`/`acao`) fica destacado, já que `tipoDestino === 'url'` não corresponde a nenhum item da lista — o campo \"Caminho da URL\" aparece \"órfão\", sem indicação visual de qual opção está ativa. Não há perda de dados: `selecionarTipoDestino` limpa `url_contem` corretamente ao trocar para qualquer outra opção.\n\n## Aderência\nConfirmei no código que \"tela\" já cobre o caso de URL via `TelaCatalogo.modo_identificacao='url_contem'` (`alvoTelaCatalogo`), validando a alegação de redundância do comentário. Consistente com o restante do arquivo (`resolverTipoDestino` em `campanhaForm.ts` já tratava esse caso antes deste diff).\n\n## Próximo passo\nPronto para validação do usuário. Se quiser, pode opcionalmente destacar visualmente o botão \"Ao abrir uma tela\" quando `tipoDestino === 'url'` (já que semanticamente é o caminho legado dessa mesma categoria), mas isso é melhoria cosmética, não bloqueio.\n\n---\nBLOQUEADO PARA /aprovar: a branch atual (sync/userpulse-remover-categoria-campanhas-20260819) nao deriva de origin/main.\n`git merge-base origin/main HEAD` nao encontrou nenhum ancestral comum — sao duas historias git\nindependentes (consistente com a separacao origin/clinic documentada em shared.md).\n\nHEAD tem 22 commits que nao existem em origin/main (rev-list --left-right --count origin/main...HEAD = 444 22),\nincluindo \"Initial import UserPulse\" — nao e so \"outra tarefa\", e uma linhagem git totalmente separada.\nPublicar uma branch a partir deste HEAD levaria essa historia inteira para o origin.\n\nNao criei nenhuma branch nem alterei o UserPulse. reviewComplete foi marcado como false para\nimpedir /aprovar ate isso ser resolvido manualmente pelo usuario (ex: recriar o diff de\nweb/src/pages/campanhas2/Index.tsx a partir de uma branch limpa baseada em origin/main).\n\nNota: origin/main ja contem \"refactor: remover categorizacao de campanhas\" (commit 68665b2/d8e7a02)\n- vale conferir se essa mudanca especifica ja nao foi resolvida por outro caminho antes de reaplicar.\n\n---\nWORKSPACE ISOLADO: USERPULSE_PATH agora aponta para UserPulse-agent (clone exclusivo do origin,\nsem o remote clinic/Quark). Esta tarefa continua bloqueada (reviewComplete=false) e nao foi\nrecuperada automaticamente no novo workspace. Use /novo para iniciar uma tarefa nova no\nworkspace limpo se quiser reaplicar a mudanca em web/src/pages/campanhas2/Index.tsx.",
+  "reviewComplete": false,
+  "reviewFingerprint": "8a5a2a42ceea031becf910776099ee77bb26494ccb8a3ab28ab98dd36d92e9ae",
+  "reviewedFiles": [
+    "web/src/pages/campanhas2/Index.tsx"
+  ],
+  "gitBranch": "sync/userpulse-remover-categoria-campanhas-20260819",
+  "localCommitSha": null,
+  "commitMessage": null,
+  "prTitle": null,
+  "prBody": null,
+  "approvedCommitSha": null,
+  "approvedAt": null,
+  "createdAt": "2026-08-22T02:26:54.970Z",
+  "updatedAt": "2026-08-22T02:41:34.929Z"
+}

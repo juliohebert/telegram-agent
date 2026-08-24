@@ -1,0 +1,14 @@
+{
+  "name": "telegram-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bridge local Telegram <-> Claude Mentor <-> Claude Dev para o UserPulse",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "engines": {
+    "node": ">=20.6.0"
+  }
+}

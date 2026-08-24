@@ -1,0 +1,11 @@
+.env
+node_modules/
+
+# state/current.json e state/tasks/*.json SAO versionados de proposito
+# (historico de tasks, preciso para continuar em outra maquina) — so o que
+# e runtime/local efemero desta maquina fica de fora:
+state/validation-logs/
+state/tmp/
+state/validation.json
+
+models/*.bin
