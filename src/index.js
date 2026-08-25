@@ -1,3 +1,10 @@
+import dns from 'node:dns';
+
+// IPv6 desta maquina esta com rota quebrada para api.telegram.org, o que causa
+// UND_ERR_CONNECT_TIMEOUT intermitente no fetch nativo do Node quando o DNS
+// retorna AAAA junto com A. Forcar IPv4 primeiro antes de qualquer chamada de rede.
+dns.setDefaultResultOrder('ipv4first');
+
 async function main() {
   let config;
   try {

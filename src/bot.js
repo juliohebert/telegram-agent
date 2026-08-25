@@ -912,7 +912,16 @@ export async function startBot() {
         }
       }
     } catch (e) {
-      console.error('Erro no loop de polling:', e.message);
+      console.error('Erro no loop de polling:', {
+        name: e?.name,
+        message: e?.message,
+        code: e?.code,
+        causeCode: e?.cause?.code,
+        causeMessage: e?.cause?.message,
+        causeErrno: e?.cause?.errno,
+        causeSyscall: e?.cause?.syscall,
+        causeHostname: e?.cause?.hostname,
+      });
       await new Promise((r) => setTimeout(r, 3000));
     }
   }
